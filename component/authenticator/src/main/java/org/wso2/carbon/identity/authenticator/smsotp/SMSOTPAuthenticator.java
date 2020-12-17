@@ -699,6 +699,10 @@ public class SMSOTPAuthenticator extends AbstractApplicationAuthenticator implem
             }
         } catch (IOException e) {
             throw new AuthenticationFailedException("Authentication Failed: An IOException was caught. ", e);
+        } finally {
+            // Remove any previous error status codes from context
+            context.removeProperty(SMSOTPConstants.TOKEN_EXPIRED);
+            context.removeProperty(SMSOTPConstants.CODE_MISMATCH);
         }
     }
 
